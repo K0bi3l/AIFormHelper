@@ -11,13 +11,13 @@ builder.Services.AddHttpClient<ChatService>();
 builder.Services.AddSingleton<ChatService>();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        builder =>
-        {
-            builder.WithOrigins("http://localhost:44402")
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        });
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+
+    });
 });
 
 var app = builder.Build();
@@ -33,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseCors("AllowFrontend");
+app.UseCors();
 app.MapControllers();
 
 app.MapFallbackToFile("index.html");

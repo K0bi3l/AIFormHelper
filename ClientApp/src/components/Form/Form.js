@@ -1,14 +1,6 @@
-﻿import React, { useState } from "react";
-import "./Form.css"; // 🔗 Import arkusza CSS
+﻿import "./Form.css"; 
 
-const Form = () => {
-    const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        reason: "",
-        urgency: null,
-    });
+const Form = ({formData, setFormData }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -35,7 +27,8 @@ const Form = () => {
         if (!validateEmail(formData.email)) {
             return;
         }
-
+        
+        alert("Form submitted!");
         console.log("Form submitted:", formData);
     };
 
@@ -84,9 +77,9 @@ const Form = () => {
                     <label>Reason of Contact:</label>
                     <textarea
                         type="text"
-                        name="reason"
+                        name="reasonOfContact"
                         maxLength="100"
-                        value={formData.reason}
+                        value={formData.reasonOfContact}
                         onChange={handleChange}
                         required
                     />

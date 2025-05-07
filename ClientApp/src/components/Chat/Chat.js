@@ -1,25 +1,56 @@
 ﻿import React, { useState } from "react";
+import axios from "axios";
 import "./Chat.css";
 
-const Chat = () => {
+const Chat = ({formData, setFormData }) => {
     const [messages, setMessages] = useState([
         { text: "Hi! How can I help you?", sender: "bot" },
     ]);
     const [input, setInput] = useState("");
 
-    const handleSend = () => {
+    const handleSend = async ()  => {
         if (!input.trim()) return;
 
         const newMessage = { text: input, sender: "user" };
         setMessages((prev) => [...prev, newMessage]);
-        
-        setTimeout(() => {
+                
+        const request = {
+            form: {
+                firstname: formData.firstname,
+                lastname: formData.lastname,
+                email: formData.email,
+                reasonOfContact: formData.reason, 
+                urgency: formData.urgency
+            },
+            content: input
+        };
+        try {
+            const response = await axios.post("https://localhost:7229/chat", request, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+
+
+            setFormData({
+                firstname: response.data.form.firstname,
+                lastname: response.data.form.lastname,
+                email: response.data.form.email,
+                reasonOfContact: response.data.form.reasonOfContact,
+                urgency: response.data.form.urgency
+            });
             setMessages((prev) => [
                 ...prev,
-                { text: "hardcoded bot answear", sender: "bot" },
+                { text: response.data.content, sender: "bot" },
             ]);
-        }, 1000);
-
+        } catch (error) {
+            console.error("Error sending message:", error);
+            setMessages((prev) => [
+                ...prev,
+                { text: "Sorry, something went wrong.", sender: "bot" },
+            ]);
+        }
         setInput("");
     };
 
