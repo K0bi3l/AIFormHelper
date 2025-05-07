@@ -1,0 +1,24 @@
+﻿.main-view-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+.form-section {
+    flex: 1;
+    align-self: flex-start;
+}
+
+.chat-section {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    height: fit-content;
+    align-self: flex-start;
+}

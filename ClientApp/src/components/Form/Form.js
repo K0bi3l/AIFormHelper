@@ -7,7 +7,7 @@ const Form = () => {
         lastname: "",
         email: "",
         reason: "",
-        urgency: 5,
+        urgency: null,
     });
 
     const handleChange = (e) => {
