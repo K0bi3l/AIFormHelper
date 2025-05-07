@@ -1,9 +1,10 @@
-import  Form from "./components/Form/Form";
+import Form from "./components/Form/Form";
+import MainView from "./components/MainView/MainView";
 
 const AppRoutes = [
   {
     index: true,
-    element: <Form />
+    element: <MainView />
   }
 ];
 
