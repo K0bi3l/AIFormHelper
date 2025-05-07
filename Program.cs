@@ -7,7 +7,6 @@ builder.Configuration.AddUserSecrets<Program>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<ChatService>();
 builder.Services.AddSingleton<ChatService>();
 builder.Services.AddCors(options =>
@@ -28,8 +27,6 @@ if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
