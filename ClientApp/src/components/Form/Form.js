@@ -18,10 +18,28 @@ const Form = () => {
         }));
     };
 
+    const validateEmail = (email) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            alert("Invalid email format");
+            return false;
+        }
+
+        return true;
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateEmail(formData.email)) {
+            return;
+        }
+
         console.log("Form submitted:", formData);
     };
+
+    
 
     return (
         <div className="form-container">
@@ -32,6 +50,7 @@ const Form = () => {
                     <input
                         type="text"
                         name="firstname"
+                        maxLength="20"
                         value={formData.firstname}
                         onChange={handleChange}
                         required
@@ -43,6 +62,7 @@ const Form = () => {
                     <input
                         type="text"
                         name="lastname"
+                        maxLength="20"
                         value={formData.lastname}
                         onChange={handleChange}
                         required
@@ -63,7 +83,9 @@ const Form = () => {
                 <div className="form-group">
                     <label>Reason of Contact:</label>
                     <textarea
+                        type="text"
                         name="reason"
+                        maxLength="100"
                         value={formData.reason}
                         onChange={handleChange}
                         required
