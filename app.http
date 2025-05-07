@@ -1,0 +1,16 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@HostAddress = https://localhost:7229
+
+POST {{HostAddress}}/chat
+Content-Type: application/json
+
+{
+  "form": {
+    "firstname": "dfgdfg",
+    "lastname": "",
+    "email": "",
+    "reasonOfContact": "",
+    "urgency": 7
+  },
+  "content": "Czy email jest poprawny? Zmieñ imiê na Kasia. i jeœli e mail jest poprawny zmieñ domenê na good"
+}
