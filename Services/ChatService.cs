@@ -15,7 +15,7 @@ namespace AIFormHelper.Services
             " Firstname (string, max 20 characters, Lastname (string, max 20 characters), Email(string in valid format)," +
             " Reason of contact (string, max 100 characters), Urgency(int in range 1 to 10). Then you will get question from person, related to filling out the form. Your goal is" +
             "to answear to that question, and based on that question, if there is a need, change the form. Your answear must be in the same pattern as the question." +
-            "You shouldn't ignore the questions and answear them. You should always give answear, even brief. Think thoroughly about the form filling.";
+            "You shouldn't ignore the questions and answear them. You must always give answear, even brief. Think thoroughly about the form filling.";
             
         public ChatService(HttpClient httpClient, IConfiguration configuration)
         {

@@ -1,0 +1,31 @@
+
+# Etap 1: Budowanie aplikacji .NET
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# Ustawiamy katalog roboczy
+WORKDIR /src
+
+# Kopiujemy plik .csproj i przywracamy zale¿noœci
+COPY AIFormHelper.csproj AIFormHelper/
+RUN dotnet restore "AIFormHelper/AIFormHelper.csproj"
+
+# Kopiujemy resztê kodu Ÿród³owego
+COPY . .
+
+# Budujemy aplikacjê .NET
+RUN dotnet publish "AIFormHelper/AIFormHelper.csproj" -c Release -o /app/publish
+
+# Etap 2: Tworzenie obrazu produkcyjnego
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# Ustawiamy katalog roboczy w obrazie produkcyjnym
+WORKDIR /app
+
+# Expose port 7229 (port, na którym bêdzie dzia³aæ aplikacja)
+EXPOSE 7229
+
+# Kopiujemy zbudowan¹ aplikacjê z etapu build
+COPY --from=build /app/publish .
+
+# Ustawiamy punkt wejœcia aplikacji
+ENTRYPOINT ["dotnet", "AIFormHelper.dll"]

@@ -1,0 +1,28 @@
+services:
+ 
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+
+ 
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "7229:7229"
+    depends_on:
+      - frontend
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
